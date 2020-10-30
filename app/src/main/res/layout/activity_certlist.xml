@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".exportcert.CertListActivity">
+
+    <Button
+        android:id="@+id/btn_certlist_OK"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="10dp"
+        android:text="확인"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_gradient" />
+
+    <EditText
+        android:id="@+id/et_certlist"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="30dp"
+        android:hint="인증서 비밀번호 입력"
+        android:textSize="15dp"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:layout_above="@+id/btn_certlist_OK"/>
+        <!--android:layout_above="@+id/et_userId"-->
+
+
+    <!--<EditText
+        android:id="@+id/et_userId"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/et_userPassword"
+        android:ems="10"
+        android:hint="건강보험공단 아이디 입력"
+        android:inputType="textEmailAddress"
+        android:textSize="15dp"/>
+
+    <EditText
+        android:id="@+id/et_userPassword"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
+        android:ems="10"
+        android:hint="건강보험공단 비밀번호 입력"
+        android:layout_above="@+id/et_identity"
+        android:inputType="textPassword"
+        android:textSize="15dp"/>
+
+    <EditText
+        android:id="@+id/et_identity"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:ems="10"
+        android:hint="주민등록번호 입력 (2010051234567)"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_above="@+id/btn_certlist_OK"
+        android:layout_marginBottom="10dp"
+        android:inputType="numberPassword"
+        android:textSize="15dp"/> -->
+
+    <LinearLayout
+        android:layout_above="@+id/et_certlist"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_listmain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+
+    </LinearLayout>
+</RelativeLayout>

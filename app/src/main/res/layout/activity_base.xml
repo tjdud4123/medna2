@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BaseActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_header"
+        android:orientation="horizontal"
+        android:layout_height="56dp"
+        android:layout_width="match_parent"
+        android:background="#4aa6db">
+
+        <ImageButton
+            android:id="@+id/btn_header_left"
+            android:layout_height="56dp"
+            android:background="@android:color/transparent"
+            android:layout_width="56dp"
+            android:src="@drawable/icon_arrow_back"/>
+
+        <TextView
+            android:id="@+id/tv_header_title"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="title"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rl_content"
+        android:layout_below="@+id/rl_header"></RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_base_popup"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="202dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@android:color/white">
+
+            <TextView
+                android:id="@+id/tv_base_popup_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="인증서 가져오기"
+                android:textSize="14sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+                android:maxLines="2"
+                android:textColor="#333333"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                />
+
+            <Button
+                android:id="@+id/btn_base_popup_ok"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_alignParentBottom="true"
+                android:text="확인"
+                android:textStyle="bold"
+                android:textColor="#8798A8"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/round_corner_popup"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

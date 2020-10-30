@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".AgreeActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/agreetitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="개인정보처리방침"
+        android:layout_marginTop="90px"
+        android:layout_marginRight="28px"
+        android:layout_marginLeft="28px"
+        android:textSize="70px"
+        android:textColor="#202020"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_below="@id/agreetitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="59px"
+        android:layout_marginLeft="28px"
+        android:layout_marginRight="28px"
+        android:layout_marginBottom="130dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_agree"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <!--<CheckBox
+        android:id="@+id/ckagree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28px"
+        android:layout_marginRight="28px"
+        android:layout_marginBottom="35dp"
+        android:layout_above="@id/btn_agree"
+        android:text="동의합니다" />-->
+
+    <com.example.myapplication4.AgreeSign
+        android:id="@+id/painter"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="28px"
+        android:layout_marginRight="28px"
+        android:layout_marginBottom="15dp"
+        android:layout_above="@id/btn_agree"
+        tools:ignore="MissingClass" />
+
+
+    <Button
+        android:id="@+id/btn_agree"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="10dp"
+        android:text="확인"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_gradient" />
+
+</RelativeLayout>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/content_main">
+
+    <TabHost
+        android:id="@+id/tabHost1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabIndicatorColor="#4aa6db"/>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- 라이트 페이지 lightcontent -->
+                <RelativeLayout
+                    android:id="@+id/light"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true">
+
+                        <TextView
+                            android:id="@+id/light_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:gravity="center"
+                            android:text="라이트 요금제"
+                            android:textColor="#444"
+                            android:textSize="60px"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/light_title2"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:layout_below="@id/light_title"
+                            android:layout_marginTop="30dp"
+                            android:gravity="center"
+                            android:text="건강검진 데이터가 없는\n\n젊은층을 위한 요금제 !"
+                            android:textColor="#444"
+                            android:textSize="40px" />
+
+                        <Button
+                            android:id="@+id/btn_self"
+                            android:layout_width="727px"
+                            android:layout_height="144px"
+                            android:layout_below="@id/light_title2"
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="50dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginEnd="50dp"
+                            android:background="@drawable/button_gradient"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:text="자가 건강 진단"
+                            android:textAllCaps="false"
+                            android:textColor="#ffffff"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <!-- 노멀 페이지 normalcontent -->
+                <RelativeLayout
+                    android:id="@+id/normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true">
+
+                    <TextView
+                        android:id="@+id/normal_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:gravity="center"
+                        android:text="노멀 요금제"
+                        android:textColor="#444"
+                        android:textSize="60px"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/normal_title2"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_below="@id/normal_title"
+                        android:layout_marginTop="30dp"
+                        android:text="건강 유지 및 증진을 위한 요금제 !"
+                        android:gravity="center"
+                        android:textColor="#444"
+                        android:textSize="40px" />
+
+                    <Button
+                        android:id="@+id/btn_self2"
+                        android:layout_width="727px"
+                        android:layout_height="144px"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginEnd="50dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_below="@id/normal_title2"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/button_gradient"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:text="자가 건강 진단"
+                        android:textAllCaps="false"
+                        android:textColor="#ffffff"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btn_certmain"
+                        android:layout_width="727px"
+                        android:layout_height="144px"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginEnd="50dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@+id/btn_self2"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/button_gradient"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:text="건강 검진 데이터 조회"
+                        android:textAllCaps="false"
+                        android:textColor="#ffffff"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+                </RelativeLayout>
+
+                <!-- 프리미엄 premiumcontent -->
+                <RelativeLayout
+                    android:id="@+id/premium"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true">
+
+                    <TextView
+                        android:id="@+id/premium_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:gravity="center"
+                        android:text="프리미엄 요금제"
+                        android:textColor="#444"
+                        android:textSize="60px"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/premium_title2"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_below="@id/premium_title"
+                        android:layout_marginTop="30dp"
+                        android:text="건강예측 및 예방을 위한 요금제 !"
+                        android:gravity="center"
+                        android:textColor="#444"
+                        android:textSize="40px" />
+
+                    <Button
+                        android:id="@+id/btn_self3"
+                        android:layout_width="727px"
+                        android:layout_height="144px"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginEnd="50dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_below="@id/premium_title2"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/button_gradient"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:text="자가 건강 진단"
+                        android:textAllCaps="false"
+                        android:textColor="#ffffff"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btn_certmain2"
+                        android:layout_width="727px"
+                        android:layout_height="144px"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginEnd="50dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@id/btn_self3"
+                        android:background="@drawable/button_gradient"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:text="건강 검진 데이터 조회"
+                        android:textAllCaps="false"
+                        android:textColor="#ffffff"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btn_dna"
+                        android:layout_width="727px"
+                        android:layout_height="144px"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginEnd="50dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@+id/btn_certmain2"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/button_gradient"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:text="DNA"
+                        android:textAllCaps="false"
+                        android:textColor="#ffffff"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                </RelativeLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+
+</RelativeLayout>
