@@ -15,9 +15,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication4.adapter.EfficacyTeaAdapter;
+import com.example.myapplication4.adapter.EfficacyTitleAdapter;
 import com.example.myapplication4.adapter.SubjectAdapter;
 import com.example.myapplication4.api.RetrofitClient;
 import com.example.myapplication4.model.Chapter;
+import com.example.myapplication4.model.EfficacyTitle;
 import com.example.myapplication4.model.Subject;
 
 import java.util.ArrayList;
@@ -36,7 +39,13 @@ public class MainFragment extends Fragment {
     private RecyclerView rvSubject;
     private SubjectAdapter subjectAdapter;
     private List<Subject> subjects;
-    List<TeaGetByResponse> teaGetResponsesList = new ArrayList<>();
+    List<TeaGetByResponse> teaGetbyResponsesList = new ArrayList<>();
+    
+    //teaefficacy
+    private RecyclerView rvEfficacy;
+    private EfficacyTitleAdapter efficacyTitleAdapter;
+    private List<EfficacyTitle> efficacyTitles;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,7 +67,6 @@ public class MainFragment extends Fragment {
         tabHost2.addTab(ts1);
 
         initComponents(v);
-
         // prepareData() 메서드 만들고 목록 호출
         subjects = prepareData();
 
@@ -112,7 +120,12 @@ public class MainFragment extends Fragment {
             public void onResponse(Call<List<TeaGetByResponse>> call, Response<List<TeaGetByResponse>> response) {
                 //Log.i("{}", response.body().get(0).teaName);
                 if(response.isSuccessful()){
-                    teaGetResponsesList = response.body();
+                    teaGetbyResponsesList = response.body();
+                    if(teaGetbyResponsesList != null){
+                        //List<TeaGetResponse> teaGetResponses = teaGetbyResponsesList.
+
+
+                    }
 
                 }
             }
@@ -123,11 +136,9 @@ public class MainFragment extends Fragment {
         });
 
         List<Subject> subjects = new ArrayList<>();
-        List<TeaGetByResponse>  = new ArrayList<>();  // 요청받은거 보여주기
+        List<TeaGetByResponse> r = new ArrayList<>();  // 요청받은거 보여주기
 
-
-
-        for(TeaGetByResponse response : ){     //
+        for(TeaGetByResponse response : r){     //
             Subject subject = new Subject();
 
             subject.id = 1;
@@ -148,6 +159,13 @@ public class MainFragment extends Fragment {
 
         return subjects;
 
+    }
+
+
+    // 효능별 티캡슐
+
+    private void initComponents2(View v) {
+        rvEfficacy = v.findViewById(R.id.rvEfficacy);
     }
 
 }

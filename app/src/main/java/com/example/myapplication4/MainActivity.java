@@ -3,15 +3,20 @@ package com.example.myapplication4;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toolbar;
 
+import com.example.myapplication4.exportcert.CertListActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
         bottomNavigationView.setSelectedItemId(R.id.menu_capsual);  //초기 화면 메뉴 아이템 지정
         getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, new MainFragment()).commit(); //초기 화면 fragment 지정
-
-
 
     } //onCreate(),,
 

@@ -1,6 +1,5 @@
 package com.example.myapplication4.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,42 +11,44 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication4.R;
-import com.example.myapplication4.model.EfficacyTitle;
+import com.example.myapplication4.TeaRecommendActivity;
+import com.example.myapplication4.model.RecommendTitle;
+import com.example.myapplication4.model.Subject;
 
-import java.util.ArrayList;
+import java.security.AccessControlContext;
 import java.util.List;
 
-public class EfficacyTitleAdapter extends RecyclerView.Adapter<EfficacyTitleAdapter.ViewHolder> {
+public class RecommendTitleAdapter extends RecyclerView.Adapter<RecommendTitleAdapter.ViewHolder> {
 
-    public List<EfficacyTitle> efficacyTitles;
+    public List<RecommendTitle> recommendTitles;
     private Context context;
     private LayoutInflater layoutInflater;
 
-    public EfficacyTitleAdapter(ArrayList<EfficacyTitle> efficacyTitles, Context context){
-        this.efficacyTitles = efficacyTitles;
+    public RecommendTitleAdapter(List<RecommendTitle> recommendTitles, TeaRecommendActivity context){
+        this.recommendTitles = recommendTitles;
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
-
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecommendTitleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.single_subject, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.recyclerView.setAdapter(new EfficacyTeaAdapter(context, efficacyTitles.get(position).efficacyTeas));
+    public void onBindViewHolder(@NonNull RecommendTitleAdapter.ViewHolder holder, int position) {
+        holder.recyclerView.setAdapter(new RecommendTeaAdapter(context, recommendTitles.get(position).recommendTeas));
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false));
         holder.recyclerView.setHasFixedSize(true);
-        holder.tvHeading.setText(efficacyTitles.get(position).efficacytitleName);
+        holder.tvHeading.setText(recommendTitles.get(position).recommendtitleName);
+
     }
 
     @Override
     public int getItemCount() {
-        return efficacyTitles.size();
+        return recommendTitles.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

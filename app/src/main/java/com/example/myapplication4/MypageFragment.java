@@ -31,7 +31,8 @@ public class MypageFragment extends Fragment {
         btn_recommend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),TeaRecommend.class);
+                Intent intent = new Intent(getContext(),TeaRecommendActivity.class);
+                startActivity(intent);
             }
         });
 

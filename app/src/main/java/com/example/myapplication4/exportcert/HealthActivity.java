@@ -47,21 +47,7 @@ public class HealthActivity extends BaseActivity implements View.OnClickListener
         //FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         //fragmentTransaction.add(R.id.framelayout, MypageFragment.newInstance()).commit();
 
-        /*HealthResponse.builder()
-                .certFile("certFile") //
-                .certPassword("certPassword") //
-                .identityNo("IdentityNo")
-                .inquiryType("InquiryType")
-                .searchEndYear("SearchEndYear")
-                .searchStartYear("SearchStartYear")
-                .type("Type")
-                .userId("userID")
-                .userPassword("userPassWord")
-                .build();*/
-
         fragment3 = new MypageFragment();
-
-        EditText certPassword2 = ((CertListActivity)CertListActivity.context_main).mEtCertPassword; // CertListActivity mEtCertPassword 변수 호출
 
         mBtnN = (Button) findViewById(R.id.btn_certlist_Next);
 
@@ -75,60 +61,6 @@ public class HealthActivity extends BaseActivity implements View.OnClickListener
 
         findViewById(R.id.btn_certlist_Next).setOnClickListener(this);
 
-        /*mBtnN.setOnClickListener(new View.OnClickListener() {
-
-            /*String userID = userId.getText().toString().trim();
-            String userPassWord = userPassword.getText().toString().trim();
-            String IdentityNo = identityNo.getText().toString().trim();
-            String InquiryType = inquiryType.getText().toString().trim();
-            String SearchStartYear = searchEndYear.getText().toString().trim();
-            String SearchEndYear = searchEndYear.getText().toString().trim();
-            String Type = type.getText().toString().trim();*/
-
-           /* @Override
-            public void onClick(View v) {
-
-                if (userID == null || userId.getText().toString().length() < 1) {
-                    userId.setError("건강보험공단 아이디를 입력해주세요");
-                    userId.requestFocus();
-                    return;
-                }
-                if (userPassWord == null || userPassword.getText().toString().length() < 1) {
-                    userPassword.setError("건강보험공단 비밀번호를 입력해주세요");
-                    userPassword.requestFocus();
-                    return;
-                }
-                if (!(IdentityNo.length() == 13)) {
-                    identityNo.setError("주민번호를 정확히 입력해주세요");
-                    identityNo.requestFocus();
-                    return;
-                }
-                if (InquiryType == null || inquiryType.getText().toString().length() < 1) {
-                    inquiryType.setError("조회 구분을 선택해 주세요");
-                    inquiryType.requestFocus();
-                    return;
-                }
-                if (SearchStartYear == null || searchStartYear.getText().toString().length() < 1) {
-                    searchStartYear.setError("조회 시작 연도를 입력해주세요");
-                    searchStartYear.requestFocus();
-                    return;
-                }
-                if (SearchEndYear == null || searchEndYear.getText().toString().length() < 1) {
-                    searchEndYear.setError("조회 종료 연도를 입력해주세요");
-                    searchStartYear.requestFocus();
-                    return;
-                }
-                if (Type == null || type.getText().toString().length() < 1) {
-                    type.setError("조회 대상을 입력해주세요");
-                    type.requestFocus();
-                    return;
-                }
-
-                Intent intent = new Intent(HealthActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });*/
-
         // 건강보험공단 아이디/비밀번호 찾기 링크
         TextView find_id_pw = (TextView) findViewById(R.id.id_pw_find);
         find_id_pw.setOnClickListener(new View.OnClickListener() {
@@ -139,13 +71,6 @@ public class HealthActivity extends BaseActivity implements View.OnClickListener
                 startActivity(intent);
             }
         });
-        /*String urlStr = "https://www.nhis.or.kr/menu/retriveMenuSet.xx?menuId=M3000";
-        Linkify.TransformFilter mTransform = new Linkify.TransformFilter() {
-            @Override
-            public String transformUrl(Matcher match, String url) {
-                return " ";
-            }
-        };*/
 
         mPfxPath = getIntent().getStringExtra("CERT_PATH");
 
@@ -154,12 +79,12 @@ public class HealthActivity extends BaseActivity implements View.OnClickListener
         }
 
     }
-    //
+    /* 프래그먼트 화면 전환
     public void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.framelayout,fragment).commit();
-    }
+    }*/
 
     // 버튼 클릭
     private void health() {

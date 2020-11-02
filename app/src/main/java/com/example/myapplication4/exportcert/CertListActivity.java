@@ -1,7 +1,10 @@
 package com.example.myapplication4.exportcert;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,10 +19,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication4.BaseActivity;
+import com.example.myapplication4.MainActivity;
 import com.example.myapplication4.R;
 
 import org.json.JSONObject;
@@ -63,29 +69,60 @@ public class CertListActivity extends BaseActivity {
         setContentView(R.layout.activity_certlist);
 
         super.setTitle("인증서 관리");
-
-        context_main = this; //
-        mCertManager = CFCertManager.getInstatnce(CertListActivity.this);  // getInstatnce : CFCertManager 객체 반환
+        mCertManager = CFCertManager.getInstatnce(CertListActivity.this); // getInstatnce : CFCertManager
 
         mRcMain = (RecyclerView) findViewById(R.id.rc_listmain);
         mEtCertPassword = (EditText) findViewById(R.id.et_certlist);
-        mEtidentity = (EditText) findViewById(R.id.et_identity);
-
-        mRcMain.setHasFixedSize(true); // RecyclerView의 사이즈 고정?
-        mLayoutManager = new LinearLayoutManager(this); // 가로 형태로 아이템 배치
+        mRcMain.setHasFixedSize(true);      // RecyclerView의 사이즈 고정?
+        mLayoutManager = new LinearLayoutManager(this);   // 가로 형태로 아이템 배치
         mRcMain.setLayoutManager(mLayoutManager);
+
+        // 권한 요청
+        if (ContextCompat.checkSelfPermission(CertListActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            if (ContextCompat.checkSelfPermission(CertListActivity.this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                // Permission is not granted
+                // Should we show an explanation?
+                if (ActivityCompat.shouldShowRequestPermissionRationale(CertListActivity.this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    // Show an explanation to the user *asynchronously* -- don't block
+                    // this thread waiting for the user's response! After the user
+                    // sees the explanation, try again to request the permission.
+                } else {
+                    // No explanation needed; request the permission
+                    ActivityCompat.requestPermissions(CertListActivity.this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            1001);
+
+                    // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                    // app-defined int constant. The callback method gets the
+                    // result of the request.
+                }
+            } else {
+                // Permission has already been granted
+//                drawCertList();
+            }
+        }else {
+//            drawCertList();
+        }
+
 
         drawCertList();
 
-        //mbtnNext = (Button) findViewById(R.id.btn_certlist_next);
         mBtnOK = (Button) findViewById(R.id.btn_certlist_OK);
 
         mBtnOK.setOnClickListener(new View.OnClickListener() {
 
-            final String certPassword = mEtCertPassword.getText().toString(); //
+
 
             @Override
             public void onClick(View v) {
+
+                String certPassword = mEtCertPassword.getText().toString();
 
                 if (mSelectIndex < 0) {
                     Toast.makeText(CertListActivity.this, "인증서를 선택해 주세요", Toast.LENGTH_SHORT).show();
@@ -93,21 +130,20 @@ public class CertListActivity extends BaseActivity {
                 }
 
                 if (certPassword == null || mEtCertPassword.getText().toString().length() < 1) {
-                    mEtCertPassword.setError("비밀번호를 입력해 주세요");
+                    Toast.makeText(CertListActivity.this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
                     mEtCertPassword.requestFocus();
                     return ;
                 }
 
                 Intent intent = new Intent(CertListActivity.this, HealthActivity.class);
-                //intent.putExtra("certpw", (Parcelable) mEtuserPassword);
-                intent.putExtra("certPassword", certPassword); //
+                intent.putExtra("certPassword",certPassword);   //
 
                 String basePath = mCertpathListData.get(mSelectIndex);
 
-                String tempPfxPath = getCacheDir() + "/tempPfx.pfx";  // getCacheDir() : 앱의 임시 캐시 파일의 내부 디렉터리를 나타내는 File을 반환
+                String tempPfxPath = getCacheDir() + "/tempPfx.pfx";
 
                 // der2Pfx : der path와 key path을 가지고 pfx파일 생성하여 해당 경로에 생성
-                if ( !mCertManager.der2Pfx(basePath+"/signCert.der", basePath+"/signPri.key", tempPfxPath, mEtCertPassword.getText().toString(), mEtCertPassword.getText().toString())) {
+                if ( !mCertManager.der2Pfx(basePath+"/signCert.der", basePath+"/signPri.key", tempPfxPath, certPassword, certPassword)) {
                     Toast.makeText(CertListActivity.this, "비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 };
@@ -129,21 +165,21 @@ public class CertListActivity extends BaseActivity {
 
     private void drawCertList() {
         try {
-            mCertpathListData = new ArrayList<>();
+            mCertpathListData = new ArrayList<String>();
             // baseNPKI 경로
             // 29 부터 외부 저장소가 접근이 허용이 안된다.
-            String directory =  Environment.getExternalStorageDirectory().getAbsolutePath();
-
+            //String directory = "/data/data/io.codef.cfcertsample" + "/NPKI";
+            String directory =  Environment.getExternalStorageDirectory() + "/NPKI";   // 최상위 폴더
             File file = new File(directory);
 
+
             if (file.exists()) {
-                file.setReadable(true);
-                searchAllCertAndKeyFiles(file.listFiles());
+                searchAllCertAndKeyFils(file.listFiles());
             }
 
             // 중복제거
-            HashSet<String> set = new HashSet<>(mCertpathListData);
-            ArrayList<String> listWithoutDuplicateElements = new ArrayList<>(set);
+            HashSet<String> set = new HashSet<String>(mCertpathListData);
+            ArrayList<String> listWithoutDuplicateElements = new ArrayList<String>(set);
 
             mAdapter = new CertAdapter(listWithoutDuplicateElements);
             mRcMain.setAdapter(mAdapter);
@@ -158,16 +194,16 @@ public class CertListActivity extends BaseActivity {
      * @param files
      * @return
      */
-    private File[] searchAllCertAndKeyFiles(File[] files){
+    private File[] searchAllCertAndKeyFils(File[] files){
         try{
-            if(files != null && files.length > 0) {
-                for (File file : files) {
-                    if (file.isDirectory()) {
-                        searchAllCertAndKeyFiles(file.listFiles());
-                    } else {
+            if(files != null && files.length > 0){
+                for(File file : files){
+                    if(file.isDirectory()){
+                        searchAllCertAndKeyFils(file.listFiles());
+                    }else{
                         String fileName = file.getName();
 
-                        if (fileName.toLowerCase().endsWith("signcert.der") == true || fileName.toLowerCase().endsWith("signpri.key")) {
+                        if(fileName.toLowerCase().endsWith("signcert.der") == true || fileName.toLowerCase().endsWith("signpri.key")){
                             mMapFileName.put(file.getParentFile().getAbsolutePath(), file.getParentFile().getName());
                             mCertpathListData.add(file.getParentFile().getAbsolutePath());
                         }
@@ -208,7 +244,6 @@ public class CertListActivity extends BaseActivity {
         @Override
         public CertAdapter.CertViewHolder onCreateViewHolder(ViewGroup parent,
                                                              int viewType) {
-
             // create a new view
             RelativeLayout v = (RelativeLayout) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.cert_list, parent, false);
@@ -227,9 +262,9 @@ public class CertListActivity extends BaseActivity {
         public void onBindViewHolder(final CertViewHolder holder, final int position) {
             final String path = mDataset.get(position) + "/signCert.der";
 
-            holder.tvTitle.setText(mCertManager.getCertNameRFC2253(path));  // getCertNameRFC2253 : 인증서 이름 RFC2253형식으로 반환
+            holder.tvTitle.setText(mCertManager.getCertNameRFC2253(path));
 
-            String policyID = mCertManager.getCertPolicyId(path);  // getCertPolicyId : 인증서 policyID반환
+            String policyID = mCertManager.getCertPolicyId(path);
 
             try{
                 JSONObject obj = mCertPids.getJSONObject(policyID);
@@ -240,7 +275,7 @@ public class CertListActivity extends BaseActivity {
                 holder.tvOrganization.setText(policyID);
             }
 
-            long expireUnixTime = mCertManager.getCertNotAfter(path);  // getCertNotAfter : 인증서 만료일 반환(UnixTiime)
+            long expireUnixTime = mCertManager.getCertNotAfter(path);
 
 
             holder.tvExprie.setText("만료일 : " + getTimestampToDate(expireUnixTime));
@@ -258,7 +293,7 @@ public class CertListActivity extends BaseActivity {
                     mSelectIndex = position;
 
                     for (String f :
-                    mMapCertSelect.keySet()) {
+                            mMapCertSelect.keySet()) {
                         mMapCertSelect.put(f, "0");
                     }
 
@@ -273,7 +308,6 @@ public class CertListActivity extends BaseActivity {
 
         @Override
         public int getItemCount() {
-
             /*if(mDataset.size()==0){
                 Toast.makeText(CertListActivity.this, "인증서가 존재하지 않습니다", Toast.LENGTH_LONG).show();
             }*/
